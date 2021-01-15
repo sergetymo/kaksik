@@ -1,9 +1,8 @@
-import Server from '../src/lib/Server.ts'
+import Application from '../src/Application.ts'
 
-const server = new Server({
+const app = new Application({
   'hostname': 'localhost',
   'port': 1965,
   'keyFile': '../cert/key.pem',
   'certFile': '../cert/cert.pem',
 })
-server.serve()

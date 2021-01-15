@@ -1,4 +1,4 @@
-import { ServerConfiguration } from '../types.d.ts'
+import { ServerConfiguration } from './types.d.ts'
 
 export default class Server {
   #configuration: ServerConfiguration
