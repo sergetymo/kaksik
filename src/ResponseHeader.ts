@@ -1,4 +1,3 @@
-import { SPACE } from '../types.d.ts'
 import ResponseStatusCode from './ResponseStatusCode.ts'
 
 export default class ResponseHeader {
@@ -13,7 +12,7 @@ export default class ResponseHeader {
   }
   
   public get contents (): Uint8Array {
-    return this.encoder.encode(`${this.statusCode}${SPACE}${this.meta}`)
+    return this.encoder.encode(`${this.statusCode} ${this.meta}\r\n`)
   }
 }
 

@@ -2,12 +2,10 @@ import ResponseBody from './ResponseBody.ts'
 import ResponseHeader from './ResponseHeader.ts'
 
 export default class Response {
-  private isSent: boolean
   public header?: ResponseHeader
   public body?: ResponseBody
 
   constructor (header?: ResponseHeader, body?: ResponseBody) {
-    this.isSent = false
     this.header = header
     this.body = body
   }
