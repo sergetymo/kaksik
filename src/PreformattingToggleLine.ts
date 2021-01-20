@@ -1,8 +1,7 @@
 import Line from './Line.ts'
 
 export default class PreformattingToggleLine extends Line {
-  private readonly BACKTICKS = '```'
-  private altText?: string
+  private readonly altText?: string
 
   constructor (altText?: string) {
     super()

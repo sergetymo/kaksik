@@ -5,7 +5,7 @@ export default class TextLine extends Line {
 
   constructor (text: string = '') {
     super()
-    // TODO: replace CRLFs with spaces
+    // TODO: replace CRLFs with spaces?
     this.text = text
   }
 

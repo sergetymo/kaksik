@@ -6,6 +6,7 @@ export default abstract class Line {
   protected readonly ARROW = '=>'
   protected readonly HASH = '#'
   protected readonly ASTERISK = '*'
+  protected readonly GREATER = '>'
 
   public get string (): string {
     return `${this.contents}${this.CRLF}`
