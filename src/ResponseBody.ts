@@ -1,9 +1,13 @@
+import Gemtext from "./Gemtext.ts"
+
 export default class ResponseBody {
   public readonly contents: Uint8Array
 
-  constructor (contents: Uint8Array | string) {
+  constructor (contents: Gemtext | Uint8Array | string) {
     if (typeof contents === 'string') {
       this.contents = new TextEncoder().encode(contents)
+    } else if (contents instanceof Gemtext) {
+      this.contents = contents.buffer
     } else {
       this.contents = contents
     }

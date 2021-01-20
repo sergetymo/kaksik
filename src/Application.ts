@@ -5,7 +5,7 @@ import Context from './Context.ts'
 export default class Application<S extends State> {
   public state: S
 
-  private serverConfiguration: ServerConfiguration
+  private config: ServerConfiguration
   private server?: Deno.Listener
   private isStarted: boolean = false
   private middleware: Array<Middleware<State, Context<State>>> = []
@@ -13,13 +13,13 @@ export default class Application<S extends State> {
 
   constructor (serverConfiguration: ServerConfiguration, initialState: S = {} as S) { 
     this.state = initialState
-    this.serverConfiguration = serverConfiguration
+    this.config = serverConfiguration
   }
 
   public async start (): Promise<void> {
-    console.log('Start')
-    this.server = Deno.listenTls(this.serverConfiguration)
+    this.server = Deno.listenTls(this.config)
     this.isStarted = true
+    console.log(`Starting app on ${this.config.hostname}:${this.config.port}...`)
     while (this.isStarted) {
       try {
         for await (const connection of this.server) {
@@ -57,7 +57,6 @@ export default class Application<S extends State> {
     } catch (error) {
       console.log(error)
     }
-
     await connection.write(context.response.contents)
     connection.close();
   }
