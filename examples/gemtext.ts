@@ -7,10 +7,8 @@ import {
 } from '../mod.ts'
 
 const app = new Application({
-  'hostname': 'localhost',
-  'port': 1965,
-  'keyFile': '../cert/key.pem',
-  'certFile': '../cert/cert.pem',
+  keyFile: '../cert/key.pem',
+  certFile: '../cert/cert.pem',
 })
 
 app.use(ctx => {
@@ -24,5 +22,3 @@ app.use(ctx => {
 })
 
 await app.start()
-
-

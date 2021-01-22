@@ -1,5 +1,5 @@
 export { Application } from './src/Application.ts'
-export type { Config, State } from './src/Application.ts'
+export type { ConfigArgument, State } from './src/Application.ts'
 export { Body } from './src/Body.ts'
 export { Context } from './src/Context.ts'
 export { Gemtext } from './src/Gemtext.ts'

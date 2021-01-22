@@ -2,6 +2,9 @@ import { Middleware, compose } from './Middleware.ts'
 import { Context } from './Context.ts'
 
 export type Config = Omit<Deno.ListenTlsOptions, 'transport'>
+export type ConfigDefaults = Required<Pick<Config, 'hostname' | 'port'>>
+export type ConfigArgument = Partial<Pick<Config, 'hostname' | 'port'>>
+  & Required<Pick<Config, 'keyFile' | 'certFile'>>
 // deno-lint-ignore no-explicit-any
 export type State = Record<string | number | symbol, any>
 
@@ -15,10 +18,13 @@ export class Application<S extends State> {
   private middleware: Array<Middleware<State, Context<State>>> = []
   private composed?: (context: Context<S>) => Promise<void>
 
-  constructor (config: Config, initialState: S = {} as S) {
+  constructor (config: ConfigArgument, initialState: S = {} as S) {
     this.decoder = new TextDecoder()
     this.state = initialState
-    this.config = config
+    this.config = Object.assign<ConfigDefaults, ConfigArgument>({
+      hostname: 'localhost',
+      port: 1965,
+    }, config)
   }
 
   public async start (): Promise<void> {

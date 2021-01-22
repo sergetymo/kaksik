@@ -15,13 +15,9 @@ export class Response {
   }
 
   public get contents (): Uint8Array {
-    if (!this._header) {
-      throw new Error('Response header is missing')
-    }
+    if (!this._header) throw new Error('Response header is missing')
     const headerContents = this._header.contents
-    if (!this._body) {
-      return headerContents
-    }
+    if (!this._body) return headerContents
     const bodyContents = this._body.contents
     const contents = new Uint8Array(headerContents.length + bodyContents.length)
     contents.set(headerContents)
