@@ -16,7 +16,7 @@ Soon
     ```
 
 ### Your first app
-Create minimal application in `app.ts`
+Create minimal application in `app.ts`:
 ```typescript
 import { Application } from 'https://deno.land/x/kaksik/mod.ts'
 
