@@ -16,6 +16,7 @@ Soon
     ```
 
 ### Your first app
+Create minimal application in `app.ts`
 ```typescript
 import { Application } from 'https://deno.land/x/kaksik/mod.ts'
 
@@ -27,6 +28,11 @@ app.use(ctx => {
   ctx.response.body = '# Hello World!'
 })
 await app.start()
+```
+
+Then run it:
+```bash
+deno run --allow-net --allow-read app.ts
 ```
 
 ### Other examples
