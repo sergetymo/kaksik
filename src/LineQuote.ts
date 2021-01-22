@@ -1,6 +1,6 @@
-import Line from './Line.ts'
+import { Line } from './Line.ts'
 
-export default class QuoteLine extends Line {
+export class LineQuote extends Line {
   private readonly text: string
 
   constructor (text: string) {

@@ -1,4 +1,4 @@
-import Application from '../src/Application.ts'
+import { Application } from '../mod.ts'
 
 const app = new Application({
   'hostname': 'localhost',
@@ -8,7 +8,7 @@ const app = new Application({
 })
 
 app.use(async (ctx, next) => {
-  console.log('Recieved', ctx.request)
+  console.log('Received', ctx.request)
   console.time('Response sent in')
   await next()
   console.timeEnd('Response sent in')
@@ -19,5 +19,5 @@ app.use(async (ctx) => {
   ctx.response.body = '# Hello World!'
 })
 
-app.start()
+await app.start()
 

@@ -1,41 +1,43 @@
-import ResponseBody from './ResponseBody.ts'
-import Gemtext from './Gemtext.ts'
-import ResponseHeader from './ResponseHeader.ts'
-import ResponseStatusCode from './ResponseStatusCode.ts'
+import { Body } from './Body.ts'
+import { Gemtext } from './Gemtext.ts'
+import { Header } from './Header.ts'
+import { StatusCode } from './StatusCode.ts'
 
-export default class Response {
-  #header?: ResponseHeader
-  #body?: ResponseBody
-  #mime: string = 'text/gemini'
+export class Response {
+  private _header?: Header
+  private _body?: Body
+  private _mime = 'text/gemini'
 
-  constructor (header?: ResponseHeader, body?: ResponseBody) {
-    this.#header = header
-    this.#body = body
+  constructor (header?: Header, body?: Body) {
+    this._header = header
+    this._body = body
+    // TODO: Mime
   }
 
   public get contents (): Uint8Array {
-    if (!this.#header) {
+    if (!this._header) {
       throw new Error('Response header is missing')
     }
-    const headerContents = this.#header.contents
-    if (!this.#body) {
+    const headerContents = this._header.contents
+    if (!this._body) {
       return headerContents
     }
-    const bodyContents = this.#body.contents
-    const responseContents = new Uint8Array(headerContents.length + bodyContents.length)
-    responseContents.set(headerContents)
-    responseContents.set(bodyContents, headerContents.length)
-    return responseContents
+    const bodyContents = this._body.contents
+    const contents = new Uint8Array(headerContents.length + bodyContents.length)
+    contents.set(headerContents)
+    contents.set(bodyContents, headerContents.length)
+    return contents
   }
 
-  public set body (contents: string | Gemtext | Uint8Array | ResponseBody) {
-    this.#header = new ResponseHeader(ResponseStatusCode.Success, this.#mime)
-    if (contents instanceof ResponseBody) {
-      this.#body = contents
+  public set body (contents: string | Gemtext | Uint8Array | Body) {
+    this._header = new Header(StatusCode.Success, this._mime)
+    if (contents instanceof Body) {
+      this._body = contents
     } else {
-      this.#body = new ResponseBody(contents)
+      this._body = new Body(contents)
     }
   }
 
   // TODO: public set header
+  // TODO: public set mime
 }

@@ -1,6 +1,6 @@
-import Line from './Line.ts'
+import { Line } from './Line.ts'
 
-export default class Gemtext {
+export class Gemtext {
   private encoder: TextEncoder
   private lines: Array<Line>
   private encoded?: Uint8Array
@@ -15,9 +15,7 @@ export default class Gemtext {
   }
 
   public get buffer (): Uint8Array {
-    if (!this.encoded) {
-      this.encoded = this.encoder.encode(this.string)
-    }
+    if (!this.encoded) this.encoded = this.encoder.encode(this.string)
     return this.encoded
   }
 }

@@ -1,6 +1,6 @@
-import { urlParse } from 'https://deno.land/x/url_parse/mod.ts'
+import { urlParse } from '../deps.ts'
 
-export default class Request {
+export class Request {
   public protocol: string
   public host: string
   public path: string
@@ -11,8 +11,6 @@ export default class Request {
     this.protocol = url.protocol || 'gemini:'
     this.host = url.hostname
     this.path = url.pathname || '/'
-    if (url.search) {
-      this.params = url.searchParams
-    }
+    if (url.search) this.params = url.searchParams
   }
 }

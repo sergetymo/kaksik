@@ -1,7 +1,8 @@
-import Line from './Line.ts'
-import { HeadingLevel } from './types.d.ts';
+import { Line } from './Line.ts'
 
-export default class HeadingLine extends Line {
+export type HeadingLevel = 1 | 2 | 3
+
+export class LineHeading extends Line {
   private readonly text: string
   private readonly level: HeadingLevel
 

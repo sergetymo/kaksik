@@ -1,6 +1,6 @@
-import Gemtext from "./Gemtext.ts"
+import { Gemtext } from './Gemtext.ts'
 
-export default class ResponseBody {
+export class Body {
   public readonly contents: Uint8Array
 
   constructor (contents: Gemtext | Uint8Array | string) {

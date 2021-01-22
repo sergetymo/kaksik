@@ -1,4 +1,4 @@
-enum ResponseStatusCode {
+export enum StatusCode {
   Input = 10,
   SensitiveInput = 11,
   Success = 20,
@@ -19,4 +19,13 @@ enum ResponseStatusCode {
   CertificateNotValid = 62
 }
 
-export default ResponseStatusCode
+export type StatusCodeFailure = StatusCode.TemporaryFailure
+  | StatusCode.ServerUnavailable
+  | StatusCode.CGIError
+  | StatusCode.ProxyError
+  | StatusCode.SlowDown
+  | StatusCode.PermanentFailure
+  | StatusCode.NotFound
+  | StatusCode.Gone
+  | StatusCode.ProxyRequestRefused
+  | StatusCode.BadRequest

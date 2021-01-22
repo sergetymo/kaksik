@@ -1,5 +1,5 @@
-import { State } from './types.d.ts'
-import Context from './Context.ts'
+import { State } from './Application.ts'
+import { Context } from './Context.ts'
 
 export interface Middleware<S extends State, C extends Context<S>> {
   (context: C, next: () => Promise<void>): Promise<void> | void
@@ -24,7 +24,7 @@ export function compose<S extends State, C extends Context<S>> (
       if (!fn) return
       await fn(context, dispatch.bind(null, i + 1))
     }
-    
+
     return dispatch(0)
   }
 }

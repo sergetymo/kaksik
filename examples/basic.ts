@@ -1,4 +1,4 @@
-import Application from '../src/Application.ts'
+import { Application } from '../mod.ts'
 
 const app = new Application({
   'hostname': 'localhost',
@@ -11,5 +11,5 @@ app.use(ctx => {
   ctx.response.body = '# Hello World!'
 })
 
-app.start()
+await app.start()
 

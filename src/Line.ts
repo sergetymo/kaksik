@@ -1,8 +1,8 @@
-export default abstract class Line {
+export abstract class Line {
   protected readonly CRLF = '\r\n'
   protected readonly SPACE = ' '
   protected readonly EMPTY = ''
-  protected readonly BACKTICKS = '```'
+  protected readonly TICKS = '```'
   protected readonly ARROW = '=>'
   protected readonly HASH = '#'
   protected readonly ASTERISK = '*'

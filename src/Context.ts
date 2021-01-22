@@ -1,9 +1,8 @@
-import { State } from './types.d.ts'
-import Application from './Application.ts'
-import Request from './Request.ts'
-import Response from './Response.ts'
+import { Application, State } from './Application.ts'
+import { Request } from './Request.ts'
+import { Response } from './Response.ts'
 
-export default class Context<S extends State> {
+export class Context<S extends State> {
   public app: Application<S>
   public state: S
   public request: Request
