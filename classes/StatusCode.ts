@@ -16,7 +16,7 @@ export enum StatusCode {
   BadRequest = 59,
   ClientCertificateRequired = 60,
   CertificateNotAuthorized = 61,
-  CertificateNotValid = 62
+  CertificateNotValid = 62,
 }
 
 export type StatusCodeFailure = StatusCode.TemporaryFailure

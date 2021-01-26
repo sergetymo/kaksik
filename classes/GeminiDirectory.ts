@@ -15,7 +15,7 @@ function isRootDir (path: string): boolean {
   return path === '/'
 }
 
-function join(...parts: Array<string>): string {
+function joinPath(...parts: Array<string>): string {
   return parts.join('/').replaceAll('//', '/')
 }
 
@@ -35,7 +35,7 @@ export class GeminiDirectory {
     return this.entries
       .sort()
       .map<LineLink>(entryPath =>
-        new LineLink(join(this.path, entryPath), entryPath)
+        new LineLink(joinPath(this.path, entryPath), entryPath)
       )
   }
 
@@ -48,15 +48,15 @@ export class GeminiDirectory {
     for await (const entry of Deno.readDir(this.systemPath)) {
       if (entry.isFile && isGeminiIndexFile(entry.name)) {
         return await new GeminiFile(
-          join(this.systemPath, entry.name)
+          joinPath(this.systemPath, entry.name)
         ).response()
       }
       this.entries.push(entry.name + (entry.isDirectory ? '/' : ''))
     }
-    return new ResponseOk(MIME_GEMINI, new Body(new GeminiText(
+    return new ResponseOk(new GeminiText(
       new LineHeading(`Listing of ${this.path}`, 1),
       new LineText(),
       ...this.links,
-    )))
+    ))
   }
 }

@@ -20,7 +20,7 @@ export class GeminiFile {
 
   public async response (): Promise<Response> {
     const contents = await Deno.readFile(this.systemPath)
-    return new ResponseOk(this.mime, new Body(contents))
+    return new ResponseOk(new Body(contents), this.mime)
   }
 }
 

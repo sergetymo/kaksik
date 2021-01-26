@@ -1,6 +1,6 @@
-import { Context } from '../src/Context.ts'
-import { State } from '../src/Application.ts'
-import { GeminiDirectory } from '../src/GeminiDirectory.ts'
+import { Context } from '../classes/Context.ts'
+import { State } from '../classes/Application.ts'
+import { GeminiDirectory } from '../classes/GeminiDirectory.ts'
 
 export function serveStatic<S extends State = Record<string, any>> (
   root: string = './',

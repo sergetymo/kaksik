@@ -6,7 +6,7 @@ export class LineLink extends Line {
 
   constructor (link: string, description?: string) {
     super()
-    // TODO: validate link
+    // TODO: validate link?
     this.link = link
     this.description = description
   }

@@ -8,10 +8,12 @@ export class Response {
   private _body?: Body
   private _mime = 'text/gemini'
 
-  constructor (header?: Header, body?: Body) {
+  constructor (header?: Header, body?: Body | GeminiText) {
     this._header = header
-    this._body = body
-    // TODO: Mime
+    this._body = body instanceof GeminiText ? new Body(body) : body
+    // TODO: ditch/move mime?
+    // TODO: auto gemini mime?
+    // TODO: Default response?
   }
 
   public get contents (): Uint8Array {

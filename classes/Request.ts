@@ -7,8 +7,8 @@ export class Request {
   public params?: URLSearchParams
 
   constructor (requestString: string) {
+    // TODO: ditch urlParse in favor of new URL()
     const url = urlParse(requestString)
-    const anUrl = new URL(requestString)
     this.protocol = url.protocol || 'gemini:'
     this.host = url.hostname
     this.path = url.pathname || ''

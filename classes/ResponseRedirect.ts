@@ -9,7 +9,7 @@ export class ResponseRedirect extends Response {
         ? StatusCode.PermanentRedirect
         : StatusCode.TemporaryRedirect
       ,
-      path)
-    )
+      path,
+    ))
   }
 }
