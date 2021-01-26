@@ -8,9 +8,10 @@ export class Request {
 
   constructor (requestString: string) {
     const url = urlParse(requestString)
+    const anUrl = new URL(requestString)
     this.protocol = url.protocol || 'gemini:'
     this.host = url.hostname
-    this.path = url.pathname || '/'
+    this.path = url.pathname || ''
     if (url.search) this.params = url.searchParams
   }
 }

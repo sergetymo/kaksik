@@ -1,5 +1,5 @@
 import { Body } from './Body.ts'
-import { Gemtext } from './Gemtext.ts'
+import { GeminiText } from './GeminiText.ts'
 import { Header } from './Header.ts'
 import { StatusCode } from './StatusCode.ts'
 
@@ -25,7 +25,7 @@ export class Response {
     return contents
   }
 
-  public set body (contents: string | Gemtext | Uint8Array | Body) {
+  public set body (contents: string | GeminiText | Uint8Array | Body) {
     this._header = new Header(StatusCode.Success, this._mime)
     if (contents instanceof Body) {
       this._body = contents

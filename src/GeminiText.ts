@@ -1,6 +1,6 @@
 import { Line } from './Line.ts'
 
-export class Gemtext {
+export class GeminiText {
   private encoder: TextEncoder
   private lines: Array<Line>
   private encoded?: Uint8Array

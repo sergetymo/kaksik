@@ -67,6 +67,7 @@ export class Application<S extends State> {
     try {
       await this.compose()(context)
     } catch (error) {
+      // TODO: respond with 50
       console.log(error)
     }
     await connection.write(context.response.contents)

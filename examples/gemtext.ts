@@ -1,6 +1,6 @@
 import {
   Application,
-  Gemtext,
+  GeminiText,
   LineHeading,
   LineLink,
   LineText,
@@ -12,7 +12,7 @@ const app = new Application({
 })
 
 app.use(ctx => {
-  ctx.response.body = new Gemtext(
+  ctx.response.body = new GeminiText(
     new LineHeading('Gemtext demo', 1),
     new LineText(),
     new LineLink('gemini://s.tymo.name', 'stymo'),
