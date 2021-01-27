@@ -1,5 +1,6 @@
 import { Middleware, compose } from './Middleware.ts'
 import { Context } from './Context.ts'
+import { ResponseFailure } from './ResponseFailure.ts'
 
 export type Config = Omit<Deno.ListenTlsOptions, 'transport'>
 export type ConfigDefaults = Required<Pick<Config, 'hostname' | 'port'>>
@@ -53,7 +54,7 @@ export class Application<S extends State> {
     return this as Application<any>
   }
 
-  private compose (): (context: Context<S>) => Promise<void> {
+  private compose (): (ctx: Context<S>) => Promise<void> {
     if (!this.composed) this.composed = compose(this.middleware)
     return this.composed
   }
@@ -63,14 +64,14 @@ export class Application<S extends State> {
     const length = await connection.read(buffer)
     if (!length) return void 0
     const requestString = this.decoder.decode(buffer.subarray(0, length))
-    const context = new Context(this, requestString)
+    const ctx = new Context(this, requestString)
     try {
-      await this.compose()(context)
+      await this.compose()(ctx)
     } catch (error) {
-      // TODO: respond with 50
-      console.log(error)
+      // TODO: catch redirects, goners and failures
+      ctx.response = new ResponseFailure()
     }
-    await connection.write(context.response.contents)
+    await connection.write(ctx.response.contents)
     connection.close();
   }
 }

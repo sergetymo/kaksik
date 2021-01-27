@@ -10,7 +10,7 @@ function isGeminiExtension (ext: string): boolean {
   return ext === '.gmi' || ext === '.gemini'
 }
 
-export class GeminiFile {
+export class File {
   private readonly mime: string
   constructor(private readonly systemPath: string) {
     isGeminiExtension(extname(systemPath))

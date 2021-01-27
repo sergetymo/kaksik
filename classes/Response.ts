@@ -1,5 +1,5 @@
 import { Body } from './Body.ts'
-import { GeminiText } from './GeminiText.ts'
+import { Gemtext } from './Gemtext.ts'
 import { Header } from './Header.ts'
 import { StatusCode } from './StatusCode.ts'
 
@@ -8,9 +8,9 @@ export class Response {
   private _body?: Body
   private _mime = 'text/gemini'
 
-  constructor (header?: Header, body?: Body | GeminiText) {
+  constructor (header?: Header, body?: Body | Gemtext) {
     this._header = header
-    this._body = body instanceof GeminiText ? new Body(body) : body
+    this._body = body instanceof Gemtext ? new Body(body) : body
     // TODO: ditch/move mime?
     // TODO: auto gemini mime?
     // TODO: Default response?
@@ -27,7 +27,7 @@ export class Response {
     return contents
   }
 
-  public set body (contents: string | GeminiText | Uint8Array | Body) {
+  public set body (contents: string | Gemtext | Uint8Array | Body) {
     this._header = new Header(StatusCode.Success, this._mime)
     if (contents instanceof Body) {
       this._body = contents

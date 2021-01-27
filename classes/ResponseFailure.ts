@@ -4,8 +4,8 @@ import { StatusCode, StatusCodeFailure } from './StatusCode.ts'
 
 export class ResponseFailure extends Response {
   constructor (
-    message: string = "Request failed",
     statusCode: StatusCodeFailure = StatusCode.TemporaryFailure,
+    message: string = "Request failed",
   ) {
     super(new Header(statusCode, message))
   }
