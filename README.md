@@ -5,11 +5,11 @@ on top of [Deno](https://deno.land) runtime, written in TypeScript.
 Heavily inspired by [oak](https://github.com/oakserver/oak) and [denoscuri](https://github.com/caranatar/denoscuri).
 
 ## Feature roadmap
-[x] Serve gemtext (out of the box, see `TODO: Gemtext docs`)
-[x] Serve static files at configured URLs (via middleware, see [serveStatic](#servestatic))
-[ ] Serve redirect responses for configured paths (via middleware)
-[ ] Serve gone response for configured resources (via middleware)
-[ ] Serve programmable resources at configured URLs (via router middleware)
+- [x] Serve gemtext (out of the box, see `TODO: Gemtext docs`)
+- [x] Serve static files at configured URLs (via middleware, see [serveStatic](#servestatic))
+- [ ] Serve redirect responses for configured paths (via middleware)
+- [ ] Serve gone response for configured resources (via middleware)
+- [ ] Serve programmable resources at configured URLs (via router middleware)
 
 ## Usage
 ### Prerequisites
