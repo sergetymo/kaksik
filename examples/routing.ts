@@ -21,7 +21,7 @@ app.use(handleRoutes(
 ))
 
 app.use(async (ctx) => {
-  ctx.response.body = '# No routes matched fallback middleware'
+  ctx.response.body = '# No routes matched, running fallback middleware'
 })
 
 await app.start()
