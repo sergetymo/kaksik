@@ -80,7 +80,8 @@ app.use(handleRoutes(
     ctx.response.body = '# Test page'
   }),
   new Route<{id?: string}>('/param/:id', async (ctx) => {
-    ctx.response.body = '# Parametrized page\r\nid = ' + ctx.pathParams.id
+    ctx.response.body = '# Parametrized page\r\n' +
+      'id = ' + ctx.pathParams.id
   }),
   new Route('/', async (ctx) => {
     ctx.response.body = '# HOME page\r\n' +
@@ -91,8 +92,10 @@ app.use(handleRoutes(
 ))
 
 app.use(async (ctx) => {
-  ctx.response.body = '# No routes matched, running fallback middleware'
+  ctx.response.body = '# No routes matched\r\n' +
+    'Running fallback middleware'
 })
+
 await app.start()
 ```
 
