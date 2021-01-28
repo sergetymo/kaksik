@@ -24,11 +24,11 @@ export class Directory {
   constructor(
     private readonly dir: string,
     private path: string,
-    private readonly alias: string
+    private readonly prefix: string
   ) {}
 
   private get systemPath (): string {
-    return [this.dir, this.path.replace(this.alias, '')].join('')
+    return [this.dir, this.path.replace(this.prefix, '')].join('')
   }
 
   private get links (): Array<LineLink> {
@@ -38,7 +38,7 @@ export class Directory {
   }
 
   private get isRootDir (): boolean {
-    return this.path === this.alias
+    return this.path === this.prefix
   }
 
   public async response (): Promise<Response> {

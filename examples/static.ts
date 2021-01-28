@@ -9,4 +9,3 @@ app.use(serveStatic('./public/no_index_file/', '/log/'))
 app.use(serveStatic('./public/'))
 
 await app.start()
-

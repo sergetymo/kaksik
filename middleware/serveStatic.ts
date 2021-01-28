@@ -7,7 +7,7 @@ import { ResponseNotFound } from '../classes/ResponseNotFound.ts'
 export function serveStatic<S extends State = Record<string, any>> (
   fromDirectory: string = './',
   toUrl: string = '/'
-) {
+): (ctx: Context<S>, next: () => Promise<void>) => Promise<void> {
   return async function (ctx: Context<S>, next: () => Promise<void>) {
     if (ctx.request.path.startsWith(toUrl)) {
       try {
