@@ -1,5 +1,5 @@
 # Kaksik
-Middleware application microframework for [Gemini](https://gemini.circumlunar.space) protocol
+Middleware library for creating applications for [Gemini](https://gemini.circumlunar.space) protocol
 on top of [Deno](https://deno.land) runtime, written in TypeScript.
 
 Heavily inspired by [oak](https://github.com/oakserver/oak) and [denoscuri](https://github.com/caranatar/denoscuri).
@@ -10,6 +10,10 @@ Heavily inspired by [oak](https://github.com/oakserver/oak) and [denoscuri](http
 - [x] Serve programmable resources at configured URLs (via middleware, see [handleRoutes](#handleroutes))
 - [x] Serve redirect responses at configured URLs (via middleware, see [handleRedirects](#handleredirects))
 - [ ] Serve gone responses at configured URLs (via middleware)
+- [ ] Improve `Response` class
+- [ ] Document `Gemtext` usage
+- [ ] -- 'Good enough' point --
+- [ ] *Propose yours by [filing an issue](https://github.com/sergetymo/kaksik/issues/new)*
 
 ## Usage
 ### Prerequisites

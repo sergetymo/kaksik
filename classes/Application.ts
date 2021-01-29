@@ -43,8 +43,6 @@ export class Application<S extends State> {
     }
   }
 
-  // TODO: public stop?
-
   public use <AS extends State = S> (
     ...middleware: Array<Middleware<AS, Context<AS>>>
   ): Application<AS extends S ? AS : (AS & S)> {
@@ -68,7 +66,6 @@ export class Application<S extends State> {
     try {
       await this.compose()(ctx)
     } catch (error) {
-      // TODO: catch redirects, goners and failures
       ctx.response = new ResponseFailure()
     }
     await connection.write(ctx.response.contents)

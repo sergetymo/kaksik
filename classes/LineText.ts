@@ -1,9 +1,7 @@
 import { Line } from './Line.ts'
 
 export class LineText extends Line {
-  private readonly text: string
-
-  constructor (text: string = '') {
+  constructor (private readonly text: string = '') {
     super()
     // TODO: replace CRLFs with spaces?
     this.text = text

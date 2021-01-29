@@ -1,14 +1,11 @@
 import { Line } from './Line.ts'
 
 export class LineLink extends Line {
-  private readonly link: string
-  private readonly description?: string
-
-  constructor (link: string, description?: string) {
+  constructor (
+    private readonly link: string,
+    private readonly description?: string,
+  ) {
     super()
-    // TODO: validate link?
-    this.link = link
-    this.description = description
   }
 
   protected get contents (): string {
