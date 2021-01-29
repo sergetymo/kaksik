@@ -1,4 +1,8 @@
-import { Application, Route, handleRoutes } from '../mod.ts'
+import {
+  Application,
+  handleRoutes,
+  Route,
+} from '../mod.ts'
 
 const app = new Application({
   keyFile: '../cert/key.pem',

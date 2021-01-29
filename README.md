@@ -8,8 +8,8 @@ Heavily inspired by [oak](https://github.com/oakserver/oak) and [denoscuri](http
 - [x] Serve gemtext (out of the box, see `TODO: Gemtext docs`)
 - [x] Serve static files at configured URLs (via middleware, see [serveStatic](#servestatic))
 - [x] Serve programmable resources at configured URLs (via middleware, see [handleRoutes](#handleroutes))
-- [ ] Serve redirect responses for configured paths (via middleware)
-- [ ] Serve gone response for configured resources (via middleware)
+- [x] Serve redirect responses at configured URLs (via middleware, see [handleRedirects](#handleredirects))
+- [ ] Serve gone responses at configured URLs (via middleware)
 
 ## Usage
 ### Prerequisites
@@ -45,6 +45,7 @@ deno run --allow-net --allow-read app.ts
 ### Other examples
 See `examples` folder.
 
+
 ## Available middleware
 ### serveStatic
 Serves static files from a directory to specified URL
@@ -64,11 +65,16 @@ await app.start()
 Beware of ordering of `serveStatic` middleware usages: more generic URLs should occur
 later that more specific, e.g., `/path/subpath/` must be before `/path/`.
 
+
 ### handleRoutes
 Runs specified async function when request path matches configured route.
 
 ```typescript
-import { Application, Route, handleRoutes } from 'https://deno.land/x/kaksik/mod.ts'
+import {
+  Application,
+  handleRoutes,
+  Route,
+} from 'https://deno.land/x/kaksik/mod.ts'
 
 const app = new Application({
   keyFile: '/path/to/key.pem',
@@ -95,6 +101,36 @@ app.use(async (ctx) => {
   ctx.response.body = '# No routes matched\r\n' +
     'Running fallback middleware'
 })
+
+await app.start()
+```
+
+### handleRedirects
+Sends either temporary or permanent redirect response when path matches configuration.
+```typescript
+import {
+  Application,
+  handleRedirects,
+  handleRoutes,
+  Redirect,
+  Route,
+} from 'https://deno.land/x/kaksik/mod.ts'
+
+const app = new Application({
+  keyFile: '/path/to/key.pem',
+  certFile: '/path/to/cert.pem',
+})
+
+app.use(handleRedirects(
+  new Redirect('/short', '/long-very-long-url', true),
+  new Redirect('/home', 'https://tymo.name'),
+))
+
+app.use(handleRoutes(
+  new Route('/long-very-long-url', async (ctx) => {
+    ctx.response.body = '# Redirect target page'
+  }),
+))
 
 await app.start()
 ```

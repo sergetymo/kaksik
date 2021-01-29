@@ -4,7 +4,7 @@ import { Directory } from '../classes/Directory.ts'
 import { ResponseFailure } from '../classes/ResponseFailure.ts'
 import { ResponseNotFound } from '../classes/ResponseNotFound.ts'
 
-export function serveStatic<S extends State = Record<string, any>> (
+export function serveStatic <S extends State = Record<string, any>> (
   fromDirectory: string = './',
   toUrl: string = '/'
 ): (ctx: Context<S>, next: () => Promise<void>) => Promise<void> {
