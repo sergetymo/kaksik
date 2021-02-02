@@ -45,6 +45,73 @@ Then run it:
 deno run --allow-net --allow-read app.ts
 ```
 
+### Gemtext
+Gemtext class represents a `text/gemini` media type that is native to Gemini protocol
+(see chapter 5 of [spec](https://gemini.circumlunar.space/docs/specification.html)).
+
+Gemtext is line-based text format, so essentially `Gemtext` is just an `Array<Line>` with helpers.
+All six line types are implemented:
+- [x] `LineText`
+- [x] `LineLink`
+- [x] `LinePreformattedToggle`
+- [x] `LineHeading`
+- [x] `LineQuote`
+- [x] `LineListItem`
+
+`Response.body` setter accepts Gemtext for convenience.
+
+```typescript
+const app = new Application({
+   keyFile: '/path/to/key.pem',
+   certFile: '/path/to/cert.pem',
+})
+
+app.use(ctx => {
+   ctx.response.body = new Gemtext(
+     new LineHeading('Gemtext demo', 1),
+     new LineText(),
+     new LineLink('gemini://s.tymo.name', 'stymo'),
+     new LineText(),
+     new LineText('There will be wrapped text. Elit eius magnam quae dolor ipsa eveniet aut? Facilis natus eum reiciendis reprehenderit odio. Sed et consectetur fuga quod illum ex minus. Iste quia dolor minus saepe in! Recusandae eligendi iusto blanditiis nostrum ipsum! Consequuntur tempora eaque dolore reiciendis sit. At exercitationem repudiandae doloremque quasi non. Nesciunt veritatis aliquid magnam unde pariatur'),
+     new LineText(),
+     new LineQuote('To be or not to be?'),
+     new LinePreformattingToggle(),
+     new LineText('There will be unwrapped text. Put some ASCII-art!'),
+     new LinePreformattingToggle(),
+   )
+})
+
+await app.start()
+```
+
+Appending new lines and other `Gemtext` instances:
+```typescript
+// ...
+const content = new Gemtext(
+  new LineHeading('Second page', 1),
+  new LineText(),
+)
+
+// ... do some calculation
+const prevPageId = 1
+const nextPageId = 3
+
+content.append(
+  new LineHeading('Navigation'),
+  new LineText(),
+)
+
+const nav = new Gemtext(
+  new LineLink(`/pages/${prevPageId}`, 'Previous page'),
+  new LineLink(`/pages/${nextPageId}`, 'Next page'),
+)
+
+content.append(
+  new LineText('----'),
+  nav,
+  new LineText('----'),
+)
+```
 
 ### Other examples
 See `examples` folder.
