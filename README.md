@@ -5,13 +5,13 @@ on top of [Deno](https://deno.land) runtime, written in TypeScript.
 Heavily inspired by [oak](https://github.com/oakserver/oak) and [denoscuri](https://github.com/caranatar/denoscuri).
 
 ## Feature roadmap
-- [x] Serve gemtext (out of the box, see `TODO: Gemtext docs`)
+- [x] Serve gemtext (out of the box, see [Gemtext usage](#gemtext-usage))
 - [x] Serve static files at configured URLs (via middleware, see [serveStatic](#servestatic))
 - [x] Serve programmable resources at configured URLs (via middleware, see [handleRoutes](#handleroutes))
 - [x] Serve redirect responses at configured URLs (via middleware, see [handleRedirects](#handleredirects))
+- [x] Document `Gemtext` usage
 - [ ] Serve gone responses at configured URLs (via middleware)
 - [ ] Improve `Response` class
-- [ ] Document `Gemtext` usage
 - [ ] -- 'Good enough' point --
 - [ ] *Propose yours by [filing an issue](https://github.com/sergetymo/kaksik/issues/new)*
 
@@ -45,11 +45,10 @@ Then run it:
 deno run --allow-net --allow-read app.ts
 ```
 
-### Gemtext
-Gemtext class represents a `text/gemini` media type that is native to Gemini protocol
+### Gemtext usage
+`Gemtext` class represents a `text/gemini` media type that is native to Gemini protocol
 (see chapter 5 of [spec](https://gemini.circumlunar.space/docs/specification.html)).
-
-Gemtext is line-based text format, so essentially `Gemtext` is just an `Array<Line>` with helpers.
+It's a line-based text format, so essentially `Gemtext` is just an `Array<Line>` with helpers.
 All six line types are implemented:
 - [x] `LineText`
 - [x] `LineLink`
@@ -62,23 +61,23 @@ All six line types are implemented:
 
 ```typescript
 const app = new Application({
-   keyFile: '/path/to/key.pem',
-   certFile: '/path/to/cert.pem',
+  keyFile: '/path/to/key.pem',
+  certFile: '/path/to/cert.pem',
 })
 
 app.use(ctx => {
-   ctx.response.body = new Gemtext(
-     new LineHeading('Gemtext demo', 1),
-     new LineText(),
-     new LineLink('gemini://s.tymo.name', 'stymo'),
-     new LineText(),
-     new LineText('There will be wrapped text. Elit eius magnam quae dolor ipsa eveniet aut? Facilis natus eum reiciendis reprehenderit odio. Sed et consectetur fuga quod illum ex minus. Iste quia dolor minus saepe in! Recusandae eligendi iusto blanditiis nostrum ipsum! Consequuntur tempora eaque dolore reiciendis sit. At exercitationem repudiandae doloremque quasi non. Nesciunt veritatis aliquid magnam unde pariatur'),
-     new LineText(),
-     new LineQuote('To be or not to be?'),
-     new LinePreformattingToggle(),
-     new LineText('There will be unwrapped text. Put some ASCII-art!'),
-     new LinePreformattingToggle(),
-   )
+  ctx.response.body = new Gemtext(
+    new LineHeading('Gemtext demo', 1),
+    new LineText(),
+    new LineLink('gemini://s.tymo.name', 'stymo'),
+    new LineText(),
+    new LineText('There will be wrapped text. Elit eius magnam quae dolor ipsa eveniet aut? Facilis natus eum reiciendis reprehenderit odio. Sed et consectetur fuga quod illum ex minus. Iste quia dolor minus saepe in! Recusandae eligendi iusto blanditiis nostrum ipsum! Consequuntur tempora eaque dolore reiciendis sit. At exercitationem repudiandae doloremque quasi non. Nesciunt veritatis aliquid magnam unde pariatur'),
+    new LineText(),
+    new LineQuote('To be or not to be?'),
+    new LinePreformattingToggle(),
+    new LineText('There will be unwrapped text. Put some ASCII-art!'),
+    new LinePreformattingToggle(),
+  )
 })
 
 await app.start()
@@ -86,26 +85,28 @@ await app.start()
 
 Appending new lines and other `Gemtext` instances:
 ```typescript
-// ...
 const content = new Gemtext(
   new LineHeading('Second page', 1),
   new LineText(),
 )
 
-// ... do some calculation
+// do some calculation
 const prevPageId = 1
 const nextPageId = 3
 
+// append more lines
 content.append(
   new LineHeading('Navigation'),
   new LineText(),
 )
 
+// create anoter Gemtext instance
 const nav = new Gemtext(
   new LineLink(`/pages/${prevPageId}`, 'Previous page'),
   new LineLink(`/pages/${nextPageId}`, 'Next page'),
 )
 
+// appending mixed lines and gemtext works too
 content.append(
   new LineText('----'),
   nav,
