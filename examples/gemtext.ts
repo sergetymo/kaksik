@@ -12,13 +12,32 @@ const app = new Application({
 })
 
 app.use(ctx => {
-  ctx.response.body = new Gemtext(
-    new LineHeading('Gemtext demo', 1),
+  const content = new Gemtext(
+    new LineHeading('Second page', 1),
     new LineText(),
-    new LineLink('gemini://s.tymo.name', 'stymo'),
-    new LineText(),
-    new LineText('There will be text. Elit eius magnam quae dolor ipsa eveniet aut? Facilis natus eum reiciendis reprehenderit odio. Sed et consectetur fuga quod illum ex minus. Iste quia dolor minus saepe in! Recusandae eligendi iusto blanditiis nostrum ipsum! Consequuntur tempora eaque dolore reiciendis sit. At exercitationem repudiandae doloremque quasi non. Nesciunt veritatis aliquid magnam unde pariatur')
   )
+
+// ... do some calculation
+  const prevPageId = 1
+  const nextPageId = 3
+
+  content.append(
+    new LineHeading('Navigation'),
+    new LineText(),
+  )
+
+  const nav = new Gemtext(
+    new LineLink(`/pages/${prevPageId}`, 'Previous page'),
+    new LineLink(`/pages/${nextPageId}`, 'Next page'),
+  )
+
+  content.append(
+    new LineText('----'),
+    nav,
+    new LineText('----'),
+  )
+
+  ctx.response.body = content
 })
 
 await app.start()

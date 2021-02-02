@@ -9,7 +9,7 @@ export type ConfigArgument = Partial<Pick<Config, 'hostname' | 'port'>>
 // deno-lint-ignore no-explicit-any
 export type State = Record<string | number | symbol, any>
 
-export class Application<S extends State> {
+export class Application <S extends State> {
   public state: S
   public readonly config: Config
 
