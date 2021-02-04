@@ -104,9 +104,14 @@ content.append(
 const nav = new Gemtext(
   new LineLink(`/pages/${prevPageId}`, 'Previous page'),
   new LineLink(`/pages/${nextPageId}`, 'Next page'),
+  // Gemtext constructor accepts other Gemtext instances
+  new Gemtext(
+    new LineText('~~~~~~~~~'),
+    new LineText('2020 A.D.'),
+  ),
 )
 
-// appending mixed lines and gemtext works too
+// appending mixed lines and Gemtext instances works too
 content.append(
   new LineText('----'),
   nav,

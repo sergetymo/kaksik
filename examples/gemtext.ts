@@ -29,6 +29,11 @@ app.use(ctx => {
   const nav = new Gemtext(
     new LineLink(`/pages/${prevPageId}`, 'Previous page'),
     new LineLink(`/pages/${nextPageId}`, 'Next page'),
+    // Grouping: Gemtext constructor accepts instances of Gemtext
+    new Gemtext(
+      new LineText('~~~~~~~~~'),
+      new LineText('2021 A.D.'),
+    ),
   )
 
   content.append(

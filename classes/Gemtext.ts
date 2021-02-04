@@ -2,12 +2,12 @@ import { Line } from './Line.ts'
 
 export class Gemtext {
   private readonly encoder: TextEncoder
-  private readonly _lines: Array<Line>
+  private readonly _lines: Array<Line> = []
   private encoded?: Uint8Array
 
-  constructor (...lines: Array<Line>) {
+  constructor (...content: Array<Line | Gemtext>) {
     this.encoder = new TextEncoder()
-    this._lines = lines
+    this.append(...content)
   }
 
   public get string (): string {
