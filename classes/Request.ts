@@ -1,5 +1,3 @@
-import { urlParse } from '../deps.ts'
-
 export class Request {
   public protocol: string
   public host: string
@@ -7,8 +5,7 @@ export class Request {
   public params?: URLSearchParams
 
   constructor (requestString: string) {
-    // TODO: ditch urlParse in favor of new URL()
-    const url = urlParse(requestString)
+    const url = new URL(requestString)
     this.protocol = url.protocol || 'gemini:'
     this.host = url.hostname
     this.path = url.pathname || ''
