@@ -14,17 +14,17 @@ export class Gemtext {
     return this._lines.map(line => line.string).join('')
   }
 
-  public get buffer (): Uint8Array {
+  public get contents (): Uint8Array {
     if (!this.encoded) this.encoded = this.encoder.encode(this.string)
     return this.encoded
   }
 
-  public get lines (): Readonly<Array<Line>> {
+  public get lines (): ReadonlyArray<Line> {
     return Object.freeze(Array.from(this._lines))
   }
 
-  public append (...content: Array<Line | Gemtext>): this {
-    content.forEach(element => {
+  public append (...linesOrGemtext: Array<Line | Gemtext>): this {
+    linesOrGemtext.forEach(element => {
       if (element instanceof Gemtext) {
         this._lines.push(...element.lines)
       } else {

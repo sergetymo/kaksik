@@ -16,7 +16,7 @@ export class Application <S extends State> {
   private server?: Deno.Listener
   private decoder: TextDecoder
   private isStarted = false
-  private middleware: Array<Middleware<State, Context<State>>> = []
+  private middleware: Array<Middleware<S, Context<S>>> = []
   private composed?: (context: Context<S>) => Promise<void>
 
   constructor (config: ConfigArgument, initialState: S = {} as S) {
@@ -65,7 +65,7 @@ export class Application <S extends State> {
     const ctx = new Context(this, requestString)
     try {
       await this.compose()(ctx)
-    } catch (error) {
+    } catch (_error) {
       ctx.response = new ResponseFailure()
     }
     await connection.write(ctx.response.contents)
