@@ -24,6 +24,7 @@ export class Gemtext {
   }
 
   public append (...linesOrGemtext: Array<Line | Gemtext>): this {
+    if (this.encoded) this.encoded = undefined
     linesOrGemtext.forEach(element => {
       if (element instanceof Gemtext) {
         this._lines.push(...element.lines)
